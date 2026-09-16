@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gridlock // Real-Time Tic Tac Toe</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <div class="eyebrow"><span class="eyebrow-dot"></span> LIVE MATCHMAKING</div>
+      <h1>Gridlock<span>//</span></h1>
+      <p class="subtitle">Real-time tic tac toe for two sharp minds.</p>
+    </header>
+
+    <!-- Connection Status -->
+    <div id="connection-status" class="connection-status">
+      <span class="status-indicator"></span>
+      <span class="status-text">Connecting...</span>
+    </div>
+
+    <!-- Login Section -->
+    <section id="login-section" class="section login-section">
+      <div class="login-card">
+        <p class="section-kicker">01 / PLAYER ID</p>
+        <h2>Claim your square.</h2>
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" id="username" placeholder="Enter your username" maxlength="15" autocomplete="off">
+        </div>
+        <button id="login-btn" class="btn btn-primary">Join match <span aria-hidden="true">→</span></button>
+        <div id="login-error" class="error-message"></div>
+      </div>
+    </section>
+
+    <!-- Game Section -->
+    <section id="game-section" class="section game-section hidden">
+      <!-- Player Info -->
+      <div class="player-info">
+        <div class="player player-x">
+          <span class="player-symbol">X</span>
+          <span class="player-name" id="player-x-name">Waiting...</span>
+        </div>
+        <div class="vs">VS</div>
+        <div class="player player-o">
+          <span class="player-symbol">O</span>
+          <span class="player-name" id="player-o-name">Waiting...</span>
+        </div>
+      </div>
+
+      <!-- Turn Indicator -->
+      <div id="turn-indicator" class="turn-indicator" aria-live="polite">
+        <span class="turn-text">Waiting for opponent...</span>
+      </div>
+
+      <!-- Game Board -->
+      <div id="game-board" class="game-board">
+        <div class="cell" data-index="0"></div>
+        <div class="cell" data-index="1"></div>
+        <div class="cell" data-index="2"></div>
+        <div class="cell" data-index="3"></div>
+        <div class="cell" data-index="4"></div>
+        <div class="cell" data-index="5"></div>
+        <div class="cell" data-index="6"></div>
+        <div class="cell" data-index="7"></div>
+        <div class="cell" data-index="8"></div>
+      </div>
+
+      <!-- Game Status -->
+      <div id="game-status" class="game-status hidden">
+        <p id="status-message"></p>
+      </div>
+
+      <!-- Active Players Count -->
+      <div class="players-count">
+        <span><span class="live-dot"></span> Active players <strong id="active-count">0</strong>/2</span>
+      </div>
+
+      <!-- Reset Button -->
+      <button id="reset-btn" class="btn btn-secondary"><span aria-hidden="true">↻</span> Reset match</button>
+    </section>
+
+    <!-- Game History Section -->
+    <section id="history-section" class="section history-section">
+      <div class="history-header">
+        <div>
+          <p class="section-kicker">02 / RECENT MATCHES</p>
+          <h3>Game history</h3>
+        </div>
+        <button id="refresh-history" class="btn btn-small"><span aria-hidden="true">↻</span> Refresh</button>
+      </div>
+      <div id="game-history" class="history-list">
+        <p class="no-data">No games played yet</p>
+      </div>
+    </section>
+
+    <!-- Winner Modal -->
+    <div id="winner-modal" class="modal hidden">
+      <div class="modal-content">
+        <div class="winner-animation">
+          <span class="winner-icon">//</span>
+        </div>
+        <h2 id="modal-title">Winner!</h2>
+        <p id="modal-message"></p>
+        <button id="modal-close" class="btn btn-primary">Play again <span aria-hidden="true">→</span></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Socket.io client library -->
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
